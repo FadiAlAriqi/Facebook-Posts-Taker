@@ -1,0 +1,80 @@
+<!-- posts.html -->  
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .summary {
+            margin-bottom: 20px;
+        }
+
+        .summary span {
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary">
+        <span>Total Posts: {{ posts|length }}</span>
+        <span>Total Likes: {{ total_likes }}</span>
+        <span>Total Comments: {{ total_comments }}</span>
+        <span>Total Shares: {{ total_shares }}</span>
+        <a href="{% url 'search0' %}">Search</a>
+    </div>
+    <table>
+        <tr>
+            <th>Post</th>
+            <th>Liks</th>
+            <th>Comments</th>
+            <th>Shares</th>
+            <th>URL</th>
+        </tr>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.message }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.comments }}</td>
+                <td>{{ post.shares }}</td>
+                <!-- <td><a href="{{ post.url }}">Post URL</a></td> -->
+                <td><a href="{% url 'view_post' post.post_id %}">Post URL</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
